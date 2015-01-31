@@ -162,41 +162,50 @@ module rook(col){
 	}
 }
 
-module bishop(col){
-	color(col)union() {
-		// Top
-  		translate([0, 0, 120])
-			difference() {
-   	   			union() {
-   	     			sphere(r = 20);
-   	     				translate([0, 0, 10])
-   	       				cylinder(h = 30, r1 = 20 * cos(30), r2 = 0);
-
-   	     				translate([0, 0, 40])
-   	       				sphere(r = 6);
-   	   				}
-   	   			rotate([45, 0, 0])
-   	     			translate([-20, 0, 0])
+module bishop_head(){
+	translate([0, 0, 120])
+		difference() {
+   			union() {
+   				sphere(r = 20);
+   	    			translate([0, 0, 10])
+   	    				cylinder(h = 30, r1 = 20 * cos(30), r2 = 0);
+    				translate([0, 0, 40])
+   	    				sphere(r = 6);
+   	   		}
+   	   		rotate([45, 0, 0])
+   	    			translate([-20, 0, 0])
    	       			cube([40, 5, 40]);
    	 	}
-	// Body
-  	cylinder(120,18,12);
+}
 
-	// Base
-  	intersection(){
+module bishop_body(){
+	cylinder(120,18,12);
+}
+
+module bishop_base(){
+	intersection(){
 		sphere(30);
 		translate([0,0,50])
 			cube(100,true);
-				}
-	
-	// Collar
-  	translate([0, 0, 90])
+	}
+}
+
+module bishop_collar(){
+	translate([0, 0, 90])
     	intersection() {
-      		cylinder(20,20,0);
+      	cylinder(20,20,0);
       	translate([0, 0, 7])
-        	mirror([0, 0, 1])
-          	cylinder(20,20,0);
+        		mirror([0, 0, 1])
+          		cylinder(20,20,0);
     	}
+}
+
+module bishop(col){
+	color(col)union() {
+		bishop_head();	
+		bishop_body();	
+		bishop_base();  	
+		bishop_collar();
 	}
 }
 
