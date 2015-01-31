@@ -10,6 +10,10 @@ $fn = 100;
 
 // Zoom out to see image!
 
+module conical_body(body_height,base_radius,top_radius){
+	cylinder(body_height,base_radius,top_radius);
+}
+
 module king_head(){
 	translate([0,0,120])
 		cylinder(20,12,20);
@@ -23,10 +27,6 @@ module king_head(){
 		cube([4,4,20],true);
 	translate([0,0,170])
 			cube([4,16,4],true);
-}
-
-module king_body(){
-	cylinder(120,18,12);
 }
 
 module king_base(){
@@ -51,7 +51,7 @@ module king(col){
 	rotate(90)
 	color(col)union(){
 		king_head();
-		king_body();
+		conical_body(120,18,12);
   		king_base();
 		king_collar();
   	}
@@ -80,10 +80,6 @@ module queen_head(){
 			sphere(5);
 }
 
-module queen_body(){
-	cylinder(120,18,12);
-}
-
 module queen_base(){
 	intersection(){
 		sphere(30);
@@ -105,7 +101,7 @@ module queen_collar(){
 module queen(col){
 	color(col)union(){
 		queen_head();
-		queen_body();
+		conical_body(120,18,12);
 		queen_base();
 		queen_collar();
 	}
@@ -178,10 +174,6 @@ module bishop_head(){
    	 	}
 }
 
-module bishop_body(){
-	cylinder(120,18,12);
-}
-
 module bishop_base(){
 	intersection(){
 		sphere(30);
@@ -203,7 +195,7 @@ module bishop_collar(){
 module bishop(col){
 	color(col)union() {
 		bishop_head();	
-		bishop_body();	
+		conical_body(120,18,12);	
 		bishop_base();  	
 		bishop_collar();
 	}
@@ -249,12 +241,6 @@ module pawn_head(){
 		sphere(20);
 }
 
-module pawn_body(){
-	cylinder(80,18,12);
-	translate([0,0,78])
-		cylinder(4,25,25);
-}
-
 module pawn_base(){
 	intersection(){
 		sphere(30);
@@ -263,11 +249,17 @@ module pawn_base(){
 	}
 }
 
+module pawn_collar(){
+	translate([0,0,78])
+		cylinder(4,25,25);
+}
+
 module pawn(col){
 	color(col)union(){
 		pawn_head();
-		pawn_body();
+		conical_body(80,18,12);
 		pawn_base();
+		pawn_collar();
 	}
 }
 
