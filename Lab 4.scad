@@ -33,6 +33,10 @@ ROOK_BODY_HEIGHT = 120;
 ROOK_BODY_RADIUS = 30;
 ROOK_BODY_DIMENSIONS = [ROOK_BODY_HEIGHT,ROOK_BODY_RADIUS];
 
+KNIGHT_BODY_HEIGHT = 40;
+KNIGHT_BODY_WIDTH = 30;
+KNIGHT_BODY_DIMENSIONS = [KNIGHT_BODY_HEIGHT,KNIGHT_BODY_WIDTH];
+
 module conical_body( dimensions_list ){
 	cylinder(dimensions_list[0],dimensions_list[1],dimensions_list[2]);
 }
@@ -41,6 +45,10 @@ module cylindrical_body ( dimensions_list ){
 	cylinder(dimensions_list[0],dimensions_list[1],dimensions_list[1]);
 }
 
+module squared_body ( dimensions_list ){
+	translate([0,0,dimensions_list[0]/2])
+			cube([dimensions_list[1],dimensions_list[1],dimensions_list[0]],true);
+}
 
 module king_head(){
 	translate([0,0,120])
@@ -155,10 +163,6 @@ module rook_head(){
 		}
 }
 
-module rook_body(){
-	cylinder(120,30,30);
-}
-
 module rook_base(){
 	intersection(){
 		sphere(40);
@@ -259,7 +263,7 @@ module knight(col){
 	rotate(90)
 	color(col)union(){
 		knight_head();	
-		knight_body();
+		squared_body(KNIGHT_BODY_DIMENSIONS);
 		knight_base();  		
 	}
 }
