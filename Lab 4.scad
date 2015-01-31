@@ -1,14 +1,9 @@
-/*
-Filename: Lab 4.scad
-Name: Brandon Hill
-Date: 10/28/14
-		I worked on this assignment alone, but I referred to http://blog.cubehero.com/2013/11/19/know-only-10-things-to-be-dangerous-in-openscad/ for inspiration and instructions ("bishop" module is based heavily off of the code from this site).
-		This is a program used to model chess pieces in OpenSCAD. There are two sections. If the section titled "Section 1" is uncommented and "Section 2" is commented out, it will produce all chess pieces of opposing colors in proper configuration. Otherwise, one of each piece will be produced for faster rendering.
-*/
 
-$fn = 100;
+WHITE = "white";
+BLACK = "black";
 
-// Zoom out to see image!
+PIECES_DETAIL_LEVEL = 100;
+
 KING_BODY_HEIGHT =  120;
 KING_BODY_BASE_RADIUS = 18;
 KING_BODY_TOP_RADIUS = 12;
@@ -51,6 +46,8 @@ KNIGHT_BODY_HEIGHT = 40;
 KNIGHT_BODY_WIDTH = 30;
 KNIGHT_BODY_DIMENSIONS = [KNIGHT_BODY_HEIGHT,KNIGHT_BODY_WIDTH];
 KINGHT_BASE_RADIUS = 30;
+
+$fn = 100;
 
 module conical_body( dimensions_list ){
 	cylinder(dimensions_list[0],dimensions_list[1],dimensions_list[2]);
@@ -257,66 +254,66 @@ module pawn(piece_color){
 for(i=[-4:3])
 	translate([100*i,-100,0])
 		rotate(180)
-			pawn("white");
+			pawn(WHITE);
 translate([0,-200,0])
 	rotate(180)
-		king("white");
+		king(WHITE);
 translate([-100,-200,0])
 	rotate(180)
-		queen("white");
+		queen(WHITE);
 translate([-400,-200,0])
 	rotate(180)
-		rook("white");
+		rook(WHITE);
 translate([300,-200,0])
 	rotate(180)
-		rook("white");
+		rook(WHITE);
 translate([-300,-200,0])
 	rotate(180)
-		knight("white");
+		knight(WHITE);
 translate([200,-200,0])
 	rotate(180)
-		knight("white");
+		knight(WHITE);
 translate([-200,-200,0])
 	rotate(180)
-		bishop("white");
+		bishop(WHITE);
 translate([100,-200,0])
 	rotate(180)
-		bishop("white");
+		bishop(WHITE);
 
 // Black Side
 for(i=[-4:3])
 	translate([100*i,100,0])
-		pawn("black");
+		pawn(BLACK);
 translate([-100,200,0])
-	king("black");
+	king(BLACK);
 translate([0,200,0])
-	queen("black");
+	queen(BLACK);
 translate([-400,200,0])
-	rook("black");
+	rook(BLACK);
 translate([300,200,0])
-	rook("black");
+	rook(BLACK);
 translate([-300,200,0])
-	knight("black");
+	knight(BLACK);
 translate([200,200,0])
-	knight("black");
+	knight(BLACK);
 translate([-200,200,0])
-	bishop("black");
+	bishop(BLACK);
 translate([100,200,0])
-	bishop("black");
+	bishop(BLACK);
 */
 
 //Section 2 - One of each piece
 
 
 translate([100,100,0])
-	rook("white");
+	rook(WHITE);
 translate([100,0,0])
-	bishop("white");
+	bishop(WHITE);
 translate([-100,100,0])
-	pawn("white");
+	pawn(WHITE);
 translate([-100,0,0])
-	queen("white");
+	queen(WHITE);
 translate([-100,-100,0])
-	king("white");
+	king(WHITE);
 translate([100,-100,0])
-	knight("white");
+	knight(WHITE);
