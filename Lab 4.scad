@@ -209,32 +209,38 @@ module bishop(col){
 	}
 }
 
+module knight_head(){
+	translate([0,0,70])
+		difference(){
+			intersection(){
+				sphere(75/2);
+				cube([75,30,75],true);
+			}
+			translate([-15,0,-10])
+				rotate([0,-45,0])
+					cube([50,50,15],true);
+		}
+}
+
+module knight_body(){
+	translate([0,0,20])
+			cube([30,30,40],true);
+}
+
+module knight_base(){
+	intersection(){
+		sphere(30);
+		translate([0,0,50])
+			cube(100,true);
+	}
+}
+
 module knight(col){
 	rotate(90)
 	color(col)union(){
-		// Head
-		
-		translate([0,0,70])
-			difference(){
-				intersection(){
-					sphere(75/2);
-					cube([75,30,75],true);
-					}
-				translate([-15,0,-10])
-					rotate([0,-45,0])
-						cube([50,50,15],true);
-				}
-
-		// Body
-		translate([0,0,20])
-			cube([30,30,40],true);
-
-		// Base
-  		intersection(){
-			sphere(30);
-			translate([0,0,50])
-				cube(100,true);
-					}
+		knight_head();	
+		knight_body();
+		knight_base();  		
 	}
 }
 
