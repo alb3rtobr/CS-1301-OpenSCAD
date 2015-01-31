@@ -14,19 +14,27 @@ KING_BODY_BASE_RADIUS = 18;
 KING_BODY_TOP_RADIUS = 12;
 KING_BODY_DIMENSIONS= [ KING_BODY_HEIGHT, KING_BODY_BASE_RADIUS, KING_BODY_TOP_RADIUS];
 KING_BASE_RADIUS = 30;
-
+KING_COLLAR_HEIGHT = 110;
+KING_COLLAR_RADIUS = 20;
+KING_COLLAR_DIMENSIONS = [KING_COLLAR_HEIGHT,KING_COLLAR_RADIUS];
 
 QUEEN_BODY_HEIGHT =  120;
 QUEEN_BODY_BASE_RADIUS = 18;
 QUEEN_BODY_TOP_RADIUS = 12;
 QUEEN_BODY_DIMENSIONS = [ QUEEN_BODY_HEIGHT, QUEEN_BODY_BASE_RADIUS, QUEEN_BODY_TOP_RADIUS];
 QUEEN_BASE_RADIUS = 30;
+QUEEN_COLLAR_HEIGHT = 110;
+QUEEN_COLLAR_RADIUS = 20;
+QUEEN_COLLAR_DIMENSIONS = [QUEEN_COLLAR_HEIGHT,QUEEN_COLLAR_RADIUS];
 
 BISHOP_BODY_HEIGHT =  120;
 BISHOP_BODY_BASE_RADIUS = 18;
 BISHOP_BODY_TOP_RADIUS = 12;
 BISHOP_BODY_DIMENSIONS = [ BISHOP_BODY_HEIGHT, BISHOP_BODY_BASE_RADIUS, BISHOP_BODY_TOP_RADIUS];
 BISHOP_BASE_RADIUS = 30;
+BISHOP_COLLAR_HEIGHT = 90;
+BISHOP_COLLAR_RADIUS = 20;
+BISHOP_COLLAR_DIMENSIONS = [BISHOP_COLLAR_HEIGHT,BISHOP_COLLAR_RADIUS];
 
 PAWN_BODY_HEIGHT =  80;
 PAWN_BODY_BASE_RADIUS = 18;
@@ -65,6 +73,16 @@ module base( base_radius ){
 	}
 }
 
+module conical_piece_beveled_collar( collar_dimensions ){
+	translate([0, 0, collar_dimensions[0]])
+    		intersection() {
+      			cylinder(collar_dimensions[1],collar_dimensions[1],0);
+     	 	translate([0, 0, 7])
+        		mirror([0, 0, 1])
+          		cylinder(collar_dimensions[1],collar_dimensions[1],0);
+    		}
+}
+
 module king_head(){
 	translate([0,0,120])
 		cylinder(20,12,20);
@@ -80,25 +98,13 @@ module king_head(){
 			cube([4,16,4],true);
 }
 
-module king_collar(){
-	KING_COLLAR_HEIGHT = 110;
-	KING_COLLAR_RADIUS = 20; 
-	translate([0, 0, KING_COLLAR_HEIGHT])
-    		intersection() {
-      			cylinder(KING_COLLAR_RADIUS,KING_COLLAR_RADIUS,0);
-     	 	translate([0, 0, 7])
-        		mirror([0, 0, 1])
-          		cylinder(KING_COLLAR_RADIUS,KING_COLLAR_RADIUS,0);
-    		}
-}
-
 module king(col){
 	rotate(90)
 	color(col)union(){
 		king_head();
 		conical_body(KING_BODY_DIMENSIONS);
   		base(KING_BASE_RADIUS);
-		king_collar();
+		conical_piece_beveled_collar(KING_COLLAR_DIMENSIONS);
   	}
 }
 
@@ -125,24 +131,12 @@ module queen_head(){
 			sphere(5);
 }
 
-module queen_collar(){
-	QUEEN_COLLAR_HEIGHT = 110;
-	QUEEN_COLLAR_RADIUS = 20;
-	translate([0, 0, QUEEN_COLLAR_HEIGHT])
-    		intersection() {
-    			cylinder(QUEEN_COLLAR_RADIUS,QUEEN_COLLAR_RADIUS,0);
-     	 	translate([0, 0, 7])
-    		    		mirror([0, 0, 1])
-          			cylinder(QUEEN_COLLAR_RADIUS,QUEEN_COLLAR_RADIUS,0);
-    		}
-}
-
 module queen(col){
 	color(col)union(){
 		queen_head();
 		conical_body(QUEEN_BODY_DIMENSIONS);
 		base(QUEEN_BASE_RADIUS);
-		queen_collar();
+		conical_piece_beveled_collar(QUEEN_COLLAR_DIMENSIONS);
 	}
 }
 
@@ -203,24 +197,12 @@ module bishop_head(){
    	 	}
 }
 
-module bishop_collar(){
-	BISHOP_COLLAR_HEIGHT = 90;
-	BISHOP_COLLAR_RADIUS = 20;
-	translate([0, 0, BISHOP_COLLAR_HEIGHT])
-    	intersection() {
-      	cylinder(BISHOP_COLLAR_RADIUS,BISHOP_COLLAR_RADIUS,0);
-      	translate([0, 0, 7])
-        		mirror([0, 0, 1])
-          		cylinder(BISHOP_COLLAR_RADIUS,BISHOP_COLLAR_RADIUS,0);
-    	}
-}
-
 module bishop(col){
 	color(col)union() {
 		bishop_head();	
 		conical_body(BISHOP_BODY_DIMENSIONS);	
 		base(BISHOP_BASE_RADIUS);  	
-		bishop_collar();
+		conical_piece_beveled_collar(BISHOP_COLLAR_DIMENSIONS);
 	}
 }
 
