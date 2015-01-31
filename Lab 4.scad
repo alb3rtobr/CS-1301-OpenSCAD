@@ -36,11 +36,16 @@ PAWN_BODY_BASE_RADIUS = 18;
 PAWN_BODY_TOP_RADIUS = 12;
 PAWN_BODY_DIMENSIONS = [ PAWN_BODY_HEIGHT, PAWN_BODY_BASE_RADIUS, PAWN_BODY_TOP_RADIUS];
 PAWN_BASE_RADIUS = 30;
+PAWN_COLLAR_HEIGHT = 78;
+PAWN_COLLAR_RADIUS = 25;
+PAWN_COLLAR_WIDTH = 4;
 
 ROOK_BODY_HEIGHT = 120;
 ROOK_BODY_RADIUS = 30;
 ROOK_BODY_DIMENSIONS = [ROOK_BODY_HEIGHT,ROOK_BODY_RADIUS];
 ROOK_BASE_RADIUS = 40;
+ROOK_COLLAR_HEIGHT = 95;
+ROOK_COLLAR_RADIUS = 40;
 
 KNIGHT_BODY_HEIGHT = 40;
 KNIGHT_BODY_WIDTH = 30;
@@ -81,7 +86,7 @@ module conical_piece_beveled_collar( collar_dimensions ){
 }
 
 module king_head(){
-	translate([0,0,120])
+	translate([0,0,KING_BODY_HEIGHT])
 		cylinder(20,12,20);
 	translate([0,0,140])
 		intersection(){
@@ -106,13 +111,13 @@ module king(piece_color){
 }
 
 module queen_head(){
-	translate([0,0,122])
+	translate([0,0,QUEEN_BODY_HEIGHT + 2])
 		intersection(){
 			sphere(20);
 				translate([0,0,57])
 					cube(100,true);
 		}
-	translate([0,0,120])
+	translate([0,0,QUEEN_BODY_HEIGHT])
 		difference(){
 			difference(){
 				cylinder(20,12,30);
@@ -138,7 +143,7 @@ module queen(piece_color){
 }
 
 module rook_head(){
-	translate([0,0,120])
+	translate([0,0,ROOK_BODY_HEIGHT])
 		difference(){
 			union(){
 				cylinder(25,40,40);
@@ -158,8 +163,6 @@ module rook_head(){
 }
 
 module rook_collar(){
-	ROOK_COLLAR_HEIGHT = 95;
-	ROOK_COLLAR_RADIUS = 40;
 	translate([0,0,ROOK_COLLAR_HEIGHT])
 		intersection(){
 			cylinder(ROOK_COLLAR_RADIUS*0.75,ROOK_COLLAR_RADIUS,0);
@@ -179,7 +182,7 @@ module rook(piece_color){
 }
 
 module bishop_head(){
-	translate([0, 0, 120])
+	translate([0, 0, BISHOP_BODY_HEIGHT])
 		difference() {
    			union() {
    				sphere(r = 20);
@@ -231,9 +234,6 @@ module pawn_head(){
 }
 
 module pawn_collar(){
-	PAWN_COLLAR_HEIGHT = 78;
-	PAWN_COLLAR_RADIUS = 25;
-	PAWN_COLLAR_WIDTH = 4;
 	translate([0,0,PAWN_COLLAR_HEIGHT])
 		cylinder(PAWN_COLLAR_WIDTH,PAWN_COLLAR_RADIUS,PAWN_COLLAR_RADIUS);
 }
