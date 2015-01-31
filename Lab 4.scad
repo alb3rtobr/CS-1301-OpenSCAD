@@ -9,10 +9,30 @@ Date: 10/28/14
 $fn = 100;
 
 // Zoom out to see image!
+KING_BODY_HEIGHT =  120;
+KING_BODY_BASE_RADIUS = 18;
+KING_BODY_TOP_RADIUS = 12;
+KING_BODY_DIMENSIONS= [ KING_BODY_HEIGHT, KING_BODY_BASE_RADIUS, KING_BODY_TOP_RADIUS];
 
-module conical_body(body_height,base_radius,top_radius){
-	cylinder(body_height,base_radius,top_radius);
+QUEEN_BODY_HEIGHT =  120;
+QUEEN_BODY_BASE_RADIUS = 18;
+QUEEN_BODY_TOP_RADIUS = 12;
+QUEEN_BODY_DIMENSIONS = [ QUEEN_BODY_HEIGHT, QUEEN_BODY_BASE_RADIUS, QUEEN_BODY_TOP_RADIUS];
+
+BISHOP_BODY_HEIGHT =  120;
+BISHOP_BODY_BASE_RADIUS = 18;
+BISHOP_BODY_TOP_RADIUS = 12;
+BISHOP_BODY_DIMENSIONS = [ BISHOP_BODY_HEIGHT, BISHOP_BODY_BASE_RADIUS, BISHOP_BODY_TOP_RADIUS];
+
+PAWN_BODY_HEIGHT =  80;
+PAWN_BODY_BASE_RADIUS = 18;
+PAWN_BODY_TOP_RADIUS = 12;
+PAWN_BODY_DIMENSIONS = [ PAWN_BODY_HEIGHT, PAWN_BODY_BASE_RADIUS, PAWN_BODY_TOP_RADIUS];
+
+module conical_body( dimensions_list ){
+	cylinder(dimensions_list[0],dimensions_list[1],dimensions_list[2]);
 }
+
 
 module king_head(){
 	translate([0,0,120])
@@ -51,7 +71,7 @@ module king(col){
 	rotate(90)
 	color(col)union(){
 		king_head();
-		conical_body(120,18,12);
+		conical_body(KING_BODY_DIMENSIONS);
   		king_base();
 		king_collar();
   	}
@@ -101,7 +121,7 @@ module queen_collar(){
 module queen(col){
 	color(col)union(){
 		queen_head();
-		conical_body(120,18,12);
+		conical_body(QUEEN_BODY_DIMENSIONS);
 		queen_base();
 		queen_collar();
 	}
@@ -195,7 +215,7 @@ module bishop_collar(){
 module bishop(col){
 	color(col)union() {
 		bishop_head();	
-		conical_body(120,18,12);	
+		conical_body(BISHOP_BODY_DIMENSIONS);	
 		bishop_base();  	
 		bishop_collar();
 	}
@@ -257,7 +277,7 @@ module pawn_collar(){
 module pawn(col){
 	color(col)union(){
 		pawn_head();
-		conical_body(80,18,12);
+		conical_body(PAWN_BODY_DIMENSIONS);
 		pawn_base();
 		pawn_collar();
 	}
