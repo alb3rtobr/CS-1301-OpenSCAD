@@ -98,9 +98,9 @@ module king_head(){
 			cube([4,16,4],true);
 }
 
-module king(col){
+module king(piece_color){
 	rotate(90)
-	color(col)union(){
+	color(piece_color)union(){
 		king_head();
 		conical_body(KING_BODY_DIMENSIONS);
   		base(KING_BASE_RADIUS);
@@ -131,8 +131,8 @@ module queen_head(){
 			sphere(5);
 }
 
-module queen(col){
-	color(col)union(){
+module queen(piece_color){
+	color(piece_color)union(){
 		queen_head();
 		conical_body(QUEEN_BODY_DIMENSIONS);
 		base(QUEEN_BASE_RADIUS);
@@ -172,8 +172,8 @@ module rook_collar(){
 		}
 }
 
-module rook(col){
-	color(col)union(){
+module rook(piece_color){
+	color(piece_color)union(){
 		rook_head();
 		cylindrical_body(ROOK_BODY_DIMENSIONS);	
 		base(ROOK_BASE_RADIUS);
@@ -197,8 +197,8 @@ module bishop_head(){
    	 	}
 }
 
-module bishop(col){
-	color(col)union() {
+module bishop(piece_color){
+	color(piece_color)union() {
 		bishop_head();	
 		conical_body(BISHOP_BODY_DIMENSIONS);	
 		base(BISHOP_BASE_RADIUS);  	
@@ -219,9 +219,9 @@ module knight_head(){
 		}
 }
 
-module knight(col){
+module knight(piece_color){
 	rotate(90)
-	color(col)union(){
+	color(piece_color)union(){
 		knight_head();	
 		squared_body(KNIGHT_BODY_DIMENSIONS);
 		base(KINGHT_BASE_RADIUS);  		
@@ -241,8 +241,8 @@ module pawn_collar(){
 		cylinder(PAWN_COLLAR_WIDTH,PAWN_COLLAR_RADIUS,PAWN_COLLAR_RADIUS);
 }
 
-module pawn(col){
-	color(col)union(){
+module pawn(piece_color){
+	color(piece_color)union(){
 		pawn_head();
 		conical_body(PAWN_BODY_DIMENSIONS);
 		base(PAWN_BASE_RADIUS);
