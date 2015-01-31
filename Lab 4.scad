@@ -13,29 +13,36 @@ KING_BODY_HEIGHT =  120;
 KING_BODY_BASE_RADIUS = 18;
 KING_BODY_TOP_RADIUS = 12;
 KING_BODY_DIMENSIONS= [ KING_BODY_HEIGHT, KING_BODY_BASE_RADIUS, KING_BODY_TOP_RADIUS];
+KING_BASE_RADIUS = 30;
+
 
 QUEEN_BODY_HEIGHT =  120;
 QUEEN_BODY_BASE_RADIUS = 18;
 QUEEN_BODY_TOP_RADIUS = 12;
 QUEEN_BODY_DIMENSIONS = [ QUEEN_BODY_HEIGHT, QUEEN_BODY_BASE_RADIUS, QUEEN_BODY_TOP_RADIUS];
+QUEEN_BASE_RADIUS = 30;
 
 BISHOP_BODY_HEIGHT =  120;
 BISHOP_BODY_BASE_RADIUS = 18;
 BISHOP_BODY_TOP_RADIUS = 12;
 BISHOP_BODY_DIMENSIONS = [ BISHOP_BODY_HEIGHT, BISHOP_BODY_BASE_RADIUS, BISHOP_BODY_TOP_RADIUS];
+BISHOP_BASE_RADIUS = 30;
 
 PAWN_BODY_HEIGHT =  80;
 PAWN_BODY_BASE_RADIUS = 18;
 PAWN_BODY_TOP_RADIUS = 12;
 PAWN_BODY_DIMENSIONS = [ PAWN_BODY_HEIGHT, PAWN_BODY_BASE_RADIUS, PAWN_BODY_TOP_RADIUS];
+PAWN_BASE_RADIUS = 30;
 
 ROOK_BODY_HEIGHT = 120;
 ROOK_BODY_RADIUS = 30;
 ROOK_BODY_DIMENSIONS = [ROOK_BODY_HEIGHT,ROOK_BODY_RADIUS];
+ROOK_BASE_RADIUS = 40;
 
 KNIGHT_BODY_HEIGHT = 40;
 KNIGHT_BODY_WIDTH = 30;
 KNIGHT_BODY_DIMENSIONS = [KNIGHT_BODY_HEIGHT,KNIGHT_BODY_WIDTH];
+KINGHT_BASE_RADIUS = 30;
 
 module conical_body( dimensions_list ){
 	cylinder(dimensions_list[0],dimensions_list[1],dimensions_list[2]);
@@ -48,6 +55,14 @@ module cylindrical_body ( dimensions_list ){
 module squared_body ( dimensions_list ){
 	translate([0,0,dimensions_list[0]/2])
 			cube([dimensions_list[1],dimensions_list[1],dimensions_list[0]],true);
+}
+
+module base( base_radius ){
+	intersection(){
+		sphere(base_radius);
+		translate([0,0,50])
+		cube(100,true);
+	}
 }
 
 module king_head(){
@@ -65,14 +80,6 @@ module king_head(){
 			cube([4,16,4],true);
 }
 
-module king_base(){
-	intersection(){
-		sphere(30);
-		translate([0,0,50])
-		cube(100,true);
-	}
-}
-
 module king_collar(){
 	translate([0, 0, 110])
     		intersection() {
@@ -88,7 +95,7 @@ module king(col){
 	color(col)union(){
 		king_head();
 		conical_body(KING_BODY_DIMENSIONS);
-  		king_base();
+  		base(KING_BASE_RADIUS);
 		king_collar();
   	}
 }
@@ -116,14 +123,6 @@ module queen_head(){
 			sphere(5);
 }
 
-module queen_base(){
-	intersection(){
-		sphere(30);
-		translate([0,0,50])
-			cube(100,true);
-	}
-}
-
 module queen_collar(){
 	translate([0, 0, 110])
     		intersection() {
@@ -138,7 +137,7 @@ module queen(col){
 	color(col)union(){
 		queen_head();
 		conical_body(QUEEN_BODY_DIMENSIONS);
-		queen_base();
+		base(QUEEN_BASE_RADIUS);
 		queen_collar();
 	}
 }
@@ -163,14 +162,6 @@ module rook_head(){
 		}
 }
 
-module rook_base(){
-	intersection(){
-		sphere(40);
-		translate([0,0,50])
-			cube(100,true);
-	}	
-}
-
 module rook_collar(){
 	translate([0,0,95])
 		intersection(){
@@ -185,7 +176,7 @@ module rook(col){
 	color(col)union(){
 		rook_head();
 		cylindrical_body(ROOK_BODY_DIMENSIONS);	
-		rook_base();
+		base(ROOK_BASE_RADIUS);
 		rook_collar();
 	}
 }
@@ -206,14 +197,6 @@ module bishop_head(){
    	 	}
 }
 
-module bishop_base(){
-	intersection(){
-		sphere(30);
-		translate([0,0,50])
-			cube(100,true);
-	}
-}
-
 module bishop_collar(){
 	translate([0, 0, 90])
     	intersection() {
@@ -228,7 +211,7 @@ module bishop(col){
 	color(col)union() {
 		bishop_head();	
 		conical_body(BISHOP_BODY_DIMENSIONS);	
-		bishop_base();  	
+		base(BISHOP_BASE_RADIUS);  	
 		bishop_collar();
 	}
 }
@@ -246,39 +229,18 @@ module knight_head(){
 		}
 }
 
-module knight_body(){
-	translate([0,0,20])
-			cube([30,30,40],true);
-}
-
-module knight_base(){
-	intersection(){
-		sphere(30);
-		translate([0,0,50])
-			cube(100,true);
-	}
-}
-
 module knight(col){
 	rotate(90)
 	color(col)union(){
 		knight_head();	
 		squared_body(KNIGHT_BODY_DIMENSIONS);
-		knight_base();  		
+		base(KINGHT_BASE_RADIUS);  		
 	}
 }
 
 module pawn_head(){
 	translate([0,0,95])
 		sphere(20);
-}
-
-module pawn_base(){
-	intersection(){
-		sphere(30);
-		translate([0,0,50])
-			cube(100,true);
-	}
 }
 
 module pawn_collar(){
@@ -290,7 +252,7 @@ module pawn(col){
 	color(col)union(){
 		pawn_head();
 		conical_body(PAWN_BODY_DIMENSIONS);
-		pawn_base();
+		base(PAWN_BASE_RADIUS);
 		pawn_collar();
 	}
 }
