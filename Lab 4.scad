@@ -29,8 +29,16 @@ PAWN_BODY_BASE_RADIUS = 18;
 PAWN_BODY_TOP_RADIUS = 12;
 PAWN_BODY_DIMENSIONS = [ PAWN_BODY_HEIGHT, PAWN_BODY_BASE_RADIUS, PAWN_BODY_TOP_RADIUS];
 
+ROOK_BODY_HEIGHT = 120;
+ROOK_BODY_RADIUS = 30;
+ROOK_BODY_DIMENSIONS = [ROOK_BODY_HEIGHT,ROOK_BODY_RADIUS];
+
 module conical_body( dimensions_list ){
 	cylinder(dimensions_list[0],dimensions_list[1],dimensions_list[2]);
+}
+
+module cylindrical_body ( dimensions_list ){
+	cylinder(dimensions_list[0],dimensions_list[1],dimensions_list[1]);
 }
 
 
@@ -172,7 +180,7 @@ module rook_collar(){
 module rook(col){
 	color(col)union(){
 		rook_head();
-		rook_body();	
+		cylindrical_body(ROOK_BODY_DIMENSIONS);	
 		rook_base();
 		rook_collar();
 	}
