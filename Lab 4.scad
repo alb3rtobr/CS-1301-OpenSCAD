@@ -111,48 +111,55 @@ module queen(col){
 	}
 }
 
+module rook_head(){
+	translate([0,0,120])
+		difference(){
+			union(){
+				cylinder(25,40,40);
+				translate([0,0,-10])
+					cylinder(10,30,40);
+			}
+			union(){
+				translate([0,0,1])
+					cylinder(30,30,30);
+				for(i=[1:3])
+					translate([0,0,35])
+						rotate(i*360/3)
+							cube([100,15,50],true);
+			}
+
+		}
+}
+
+module rook_body(){
+	cylinder(120,30,30);
+}
+
+module rook_base(){
+	intersection(){
+		sphere(40);
+		translate([0,0,50])
+			cube(100,true);
+	}	
+}
+
+module rook_collar(){
+	translate([0,0,95])
+		intersection(){
+			cylinder(30,40,0);
+			translate([0,0,7])
+				mirror([0,0,1])
+					cylinder(30,40,0);
+		}
+}
+
 module rook(col){
 	color(col)union(){
-		// Top
-		translate([0,0,120])
-			difference(){
-				union(){
-					cylinder(25,40,40);
-					translate([0,0,-10])
-						cylinder(10,30,40);
-					}
-				union(){
-					translate([0,0,1])
-						cylinder(30,30,30);
-					for(i=[1:3])
-						translate([0,0,35])
-							rotate(i*360/3)
-								cube([100,15,50],true);
-			}
-
-		}
-			
-
-		
-			// Body
-			cylinder(120,30,30);
-		
-			// Base
-			intersection(){
-				sphere(40);
-				translate([0,0,50])
-					cube(100,true);
-				}
-
-			// Collar
-			translate([0,0,95])
-				intersection(){
-					cylinder(30,40,0);
-					translate([0,0,7])
-						mirror([0,0,1])
-							cylinder(30,40,0);
-			}
-		}
+		rook_head();
+		rook_body();	
+		rook_base();
+		rook_collar();
+	}
 }
 
 module bishop(col){
