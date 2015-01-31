@@ -81,12 +81,14 @@ module king_head(){
 }
 
 module king_collar(){
-	translate([0, 0, 110])
+	KING_COLLAR_HEIGHT = 110;
+	KING_COLLAR_RADIUS = 20; 
+	translate([0, 0, KING_COLLAR_HEIGHT])
     		intersection() {
-      			cylinder(20,20,0);
+      			cylinder(KING_COLLAR_RADIUS,KING_COLLAR_RADIUS,0);
      	 	translate([0, 0, 7])
         		mirror([0, 0, 1])
-          		cylinder(20,20,0);
+          		cylinder(KING_COLLAR_RADIUS,KING_COLLAR_RADIUS,0);
     		}
 }
 
@@ -124,12 +126,14 @@ module queen_head(){
 }
 
 module queen_collar(){
-	translate([0, 0, 110])
+	QUEEN_COLLAR_HEIGHT = 110;
+	QUEEN_COLLAR_RADIUS = 20;
+	translate([0, 0, QUEEN_COLLAR_HEIGHT])
     		intersection() {
-    			cylinder(20,20,0);
+    			cylinder(QUEEN_COLLAR_RADIUS,QUEEN_COLLAR_RADIUS,0);
      	 	translate([0, 0, 7])
     		    		mirror([0, 0, 1])
-          			cylinder(20,20,0);
+          			cylinder(QUEEN_COLLAR_RADIUS,QUEEN_COLLAR_RADIUS,0);
     		}
 }
 
@@ -163,12 +167,14 @@ module rook_head(){
 }
 
 module rook_collar(){
-	translate([0,0,95])
+	ROOK_COLLAR_HEIGHT = 95;
+	ROOK_COLLAR_RADIUS = 40;
+	translate([0,0,ROOK_COLLAR_HEIGHT])
 		intersection(){
-			cylinder(30,40,0);
+			cylinder(ROOK_COLLAR_RADIUS*0.75,ROOK_COLLAR_RADIUS,0);
 			translate([0,0,7])
 				mirror([0,0,1])
-					cylinder(30,40,0);
+					cylinder(ROOK_COLLAR_RADIUS*0.75,ROOK_COLLAR_RADIUS,0);
 		}
 }
 
@@ -198,12 +204,14 @@ module bishop_head(){
 }
 
 module bishop_collar(){
-	translate([0, 0, 90])
+	BISHOP_COLLAR_HEIGHT = 90;
+	BISHOP_COLLAR_RADIUS = 20;
+	translate([0, 0, BISHOP_COLLAR_HEIGHT])
     	intersection() {
-      	cylinder(20,20,0);
+      	cylinder(BISHOP_COLLAR_RADIUS,BISHOP_COLLAR_RADIUS,0);
       	translate([0, 0, 7])
         		mirror([0, 0, 1])
-          		cylinder(20,20,0);
+          		cylinder(BISHOP_COLLAR_RADIUS,BISHOP_COLLAR_RADIUS,0);
     	}
 }
 
@@ -244,8 +252,11 @@ module pawn_head(){
 }
 
 module pawn_collar(){
-	translate([0,0,78])
-		cylinder(4,25,25);
+	PAWN_COLLAR_HEIGHT = 78;
+	PAWN_COLLAR_RADIUS = 25;
+	PAWN_COLLAR_WIDTH = 4;
+	translate([0,0,PAWN_COLLAR_HEIGHT])
+		cylinder(PAWN_COLLAR_WIDTH,PAWN_COLLAR_RADIUS,PAWN_COLLAR_RADIUS);
 }
 
 module pawn(col){
