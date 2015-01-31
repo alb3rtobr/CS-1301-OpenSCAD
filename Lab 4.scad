@@ -244,22 +244,30 @@ module knight(col){
 	}
 }
 
+module pawn_head(){
+	translate([0,0,95])
+		sphere(20);
+}
+
+module pawn_body(){
+	cylinder(80,18,12);
+	translate([0,0,78])
+		cylinder(4,25,25);
+}
+
+module pawn_base(){
+	intersection(){
+		sphere(30);
+		translate([0,0,50])
+			cube(100,true);
+	}
+}
+
 module pawn(col){
 	color(col)union(){
-		//Top
-		translate([0,0,95])
-			sphere(20);
-		// Body
-  		cylinder(80,18,12);
-		translate([0,0,78])
-			cylinder(4,25,25);
-		
-		// Base
-  		intersection(){
-			sphere(30);
-			translate([0,0,50])
-				cube(100,true);
-					}
+		pawn_head();
+		pawn_body();
+		pawn_base();
 	}
 }
 
